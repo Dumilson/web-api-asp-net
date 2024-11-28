@@ -6,8 +6,11 @@ public class OrderModel
     public Guid ClientID { get; set; }
     public decimal Total { get; set; }
     public string? Status { get; set; }
+    public ICollection<ProductModel> Products { get; set; }
 
-    public OrderModel() { }
+    public OrderModel()
+    {
+    }
 
 
     public OrderModel(Guid clientId, decimal total, string? status)
@@ -16,10 +19,16 @@ public class OrderModel
         ClientID = clientId;
         Total = total;
         Status = status;
+
     }
 
     public void ChangeStatus(string? status)
     {
         Status = status;
+    }
+
+    public void ChangeTotal(decimal total)
+    {
+        Total = total;
     }
 }

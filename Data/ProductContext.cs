@@ -10,4 +10,12 @@ public class ProductContext : DbContext
     }
 
     public DbSet<ProductModel> Products { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ProductModel>()
+            .Property(p => p.Price)
+            .HasColumnType("decimal(18,2)"); 
+    }
+
 }

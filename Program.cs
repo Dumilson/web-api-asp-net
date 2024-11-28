@@ -29,10 +29,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-app.OrderRoute();
 app.ProductRoute();
 app.UserRoute();
+app.OrderRoute();
+
+
 
 app.UseHttpsRedirection();
 app.Run();

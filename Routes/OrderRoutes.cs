@@ -11,14 +11,29 @@ public static class OrderRoutes
 
         routes.MapGet("", async (OrderRepository repo) =>
         {
-            var orders = await repo.getAllOrders();
+            var orders = await repo.GetAllOrdersAsync();
             return Results.Ok(orders);
         });
 
-        routes.MapPost("", (OrderRequest req, OrderRepository repo) =>
+
+        routes.MapGet("{id:guid}", async (Guid id, OrderRepository repo) =>
         {
-            repo.Create(req);
-            return Results.Ok("Ok");
+            var orders = await repo.getOrder(id);
+            return Results.Ok(orders);
+        });
+
+
+
+        routes.MapPost("", async (OrderRequest req, OrderRepository repo, ClientRepository client) =>
+        {
+            var clients =   client.GetClientById(req.ClientID);
+            if (clients == null)
+            {
+                return Results.NotFound("Cliente não econtrado");
+            }
+
+            var saveOrder =  repo.CreateAsync(req);
+            return Results.Ok(req);
         });
     }
 }

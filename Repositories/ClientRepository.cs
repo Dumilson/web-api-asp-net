@@ -17,4 +17,10 @@ public class ClientRepository
         var users = await _context.Clients.ToListAsync();
         return users;
     }
+
+    public async Task<ClientModel> GetClientById(Guid id)
+    {
+        var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == id);
+        return client;
+    }
 }

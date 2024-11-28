@@ -18,4 +18,10 @@ public class ProductRepository
         var products = await _context.Products.ToListAsync();
         return products;
     }
+
+    public async Task<ProductModel> GetProductById(Guid id)
+    {
+        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+        return product;
+    }
 }

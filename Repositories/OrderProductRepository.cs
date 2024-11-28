@@ -1,21 +1,26 @@
+using Microsoft.EntityFrameworkCore;
 using OrderManager.Data;
 using OrderManager.Models;
 
-namespace OrderManager.Repositories;
-
-public class OrderProductRepository
+namespace OrderManager.Repositories
 {
-    private readonly OrderProductContext _context;
-
-    public OrderProductRepository(OrderProductContext context)
+    public class OrderProductRepository
     {
-        _context = context;
+        private readonly OrderProductContext _context;
+
+        public OrderProductRepository(OrderProductContext context)
+        {
+            _context = context;
+        }
+
+        
+        public async Task CreateProductAsync(Guid orderId, Guid productId, int quantity)
+        {
+            var createOrderProduct = new OrderProductsModel(orderId, productId, quantity);
+            await _context.OrderProducts.AddAsync(createOrderProduct);
+            await _context.SaveChangesAsync(); 
+        } 
     }
 
-    public void CreateProduct(Guid orderId, Guid productId, int quantity)
-    {
-        var createOrderProduct = new OrderProductsModel(orderId, productId, quantity);
-        _context.OrderProducts.Add(createOrderProduct);
-        _context.SaveChanges();
-    }
+
 }

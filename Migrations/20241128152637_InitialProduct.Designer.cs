@@ -12,8 +12,8 @@ using OrderManager.Data;
 namespace OrderManager.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20241128132302_InitialProducts")]
-    partial class InitialProducts
+    [Migration("20241128152637_InitialProduct")]
+    partial class InitialProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
